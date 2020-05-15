@@ -1,9 +1,8 @@
 package com.xiaofei.ontologyandroidsdkuse;
 
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.github.ontio.OntSdk;
-import com.github.ontio.common.UInt256;
 import com.github.ontio.core.block.Block;
 import com.github.ontio.core.transaction.Transaction;
 import com.github.ontio.sdk.manager.ConnectMgr;

@@ -1,10 +1,13 @@
 package com.xiaofei.ontologyandroidsdkuse;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
 import com.github.ontio.OntSdk;
+import com.github.ontio.sdk.wallet.Account;
+import com.xiaofei.ontologyandroidsdkuse.kotlin.manager.OntologyAccountManager;
+import com.xiaofei.ontologyandroidsdkuse.kotlin.manager.OntologyKeyManager;
 
 import okhttp3.OkHttpClient;
 
@@ -24,20 +27,31 @@ public class MainActivity extends AppCompatActivity {
 //        }catch (Exception ex){
 //            ex.printStackTrace();
 //        }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ontSdk = OntSdk.getInstance();
-                    ontSdk.setRestful("http://polaris1.ont.io:20334");
-                    int blockHeight = ontSdk.getConnect().getBlockHeight();
-                    Log.i("cjf", "onCreate: " + blockHeight);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    ontSdk = OntSdk.getInstance();
+//                    ontSdk.setRestful("http://polaris1.ont.io:20334");
+//                    int blockHeight = ontSdk.getConnect().getBlockHeight();
+//                    Log.i("cjf", "onCreate: " + blockHeight);
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//        }).start();
+        Account account = OntologyAccountManager.INSTANCE.createAccount("123456");
+        // TODO : Should i create instance to WalletMgr in OntSdk instance
+        Log.d("TEST", "======================ACCOUNT======================");
+        Log.d("TEST", " > " + account.key);
+        Log.d("TEST", " > " + account.address);
+        Log.d("TEST", " > " + account.publicKey);
+        Log.d("TEST", "===================================================");
 
+        String mnemonic = OntologyKeyManager.INSTANCE.generateMnemonic();
+        Log.d("TEST", " > " + mnemonic);
+        Log.d("TEST", " > " + OntologyKeyManager.INSTANCE.getSeedFromMnemonic(mnemonic));
+        Log.d("TEST", " > " + OntologyKeyManager.INSTANCE.getPrivatekeyFromMnemonicBip44(mnemonic));
 
 
 //        FutureTask<Integer> futureBlockHeight = new FutureTask<>(new Callable<Integer>() {
