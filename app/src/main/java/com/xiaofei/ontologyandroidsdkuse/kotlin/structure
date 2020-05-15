@@ -1,0 +1,56 @@
+
+
+For android ontology wallet
+
+Functions
+ 1. Manage account in walletMgr
+   1) generate account
+     using [password]
+     using [password, private key]
+   2) import account
+     using [encryptedPrivateKey, password, salt, address]
+   3) get account
+     using [address]
+   4) generate address
+     using [Account]
+   5) get address
+     using [Account]
+
+ 2. Manage Ontology
+ 3. Manage Ontology gas
+
+
+
+Features
+ 1. AccountWrapper
+ 2. WalletWrapper
+ 3. ONTWrapper
+ 4. ONGWrapper
+ 5. NEP5Wrapper
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --- Check notes ---
+
+ 1. Difference Create account without wallet manager and using wallet manager.
+ 2. Difference Account and AccountInfo
+  - perhaps Account - model / AccountInfo - data model
+ 3. What is byte[] salt
+
+
+ --- Documents ---
+ https://github.com/ontio/ontology-java-sdk/blob/master/docs/en/sdk_get_start.md
+ https://github.com/ontio/ontology-java-sdk/blob/master/docs/en/interface.md
