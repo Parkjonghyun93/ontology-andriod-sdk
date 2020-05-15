@@ -1,24 +1,19 @@
 package com.xiaofei.ontologyandroidsdkuse;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
-import com.alibaba.fastjson.JSON;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import com.alibaba.fastjson.JSONObject;
 import com.github.ontio.OntSdk;
 import com.github.ontio.account.Account;
 import com.github.ontio.common.Helper;
 import com.github.ontio.crypto.SignatureScheme;
-import com.github.ontio.sdk.info.IdentityInfo;
-import com.github.ontio.sdk.wallet.Identity;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class GovernanceTest {
