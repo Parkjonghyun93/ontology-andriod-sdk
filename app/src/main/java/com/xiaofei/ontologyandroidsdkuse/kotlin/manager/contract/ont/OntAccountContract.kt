@@ -14,4 +14,5 @@ interface OntAccountContract {
     fun createAccountInfo(password: String): AccountInfo
     fun createAccountInfo(password: String, privateKey: String): AccountInfo
     fun getAccountInfo(address: String, password: String, salt: ByteArray) : AccountInfo
+    fun getAccount(address: String): com.github.ontio.account.Account
 }

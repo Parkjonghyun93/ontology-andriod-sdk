@@ -1,6 +1,6 @@
 package com.xiaofei.ontologyandroidsdkuse.kotlin.manager.contract.cobak
 
-import com.xiaofei.ontologyandroidsdkuse.kotlin.manager.OntologyKeyManager
+import com.github.ontio.sdk.wallet.Wallet
 
 /**
  * [Creator : Jonghyun_park(james.park)]
@@ -10,5 +10,5 @@ interface CobakOntKeyContract {
     fun importMnemonic(mnemonicCodesStr: String)
     fun exportMnemonic(password: String): String
     fun importKeystore()
-    fun exportKeystore()
+    fun exportKeystore(): Wallet
 }
