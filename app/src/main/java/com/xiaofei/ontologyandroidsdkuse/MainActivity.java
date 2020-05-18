@@ -1,19 +1,29 @@
 package com.xiaofei.ontologyandroidsdkuse;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
+import android.view.View;
 
 import com.github.ontio.OntSdk;
+import com.github.ontio.common.Helper;
+import com.github.ontio.crypto.SignatureScheme;
 import com.github.ontio.sdk.wallet.Account;
-import com.xiaofei.ontologyandroidsdkuse.kotlin.manager.OntologyAccountManager;
-import com.xiaofei.ontologyandroidsdkuse.kotlin.manager.OntologyKeyManager;
+import com.xiaofei.ontologyandroidsdkuse.kotlin.common.CryptoSharedPreference;
+import com.xiaofei.ontologyandroidsdkuse.kotlin.common.OntologyRepositoryManager;
+import com.xiaofei.ontologyandroidsdkuse.kotlin.core.OntologyCore;
+import com.xiaofei.ontologyandroidsdkuse.kotlin.manager.implement.OntologyAccountManager;
+import com.xiaofei.ontologyandroidsdkuse.kotlin.manager.implement.OntologyKeyManager;
+import com.xiaofei.ontologyandroidsdkuse.kotlin.manager.implement.OntologyManager;
 
 import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity {
     OkHttpClient client = new OkHttpClient();
     private OntSdk ontSdk;
+    private String password = "123456";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +50,43 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //        }).start();
-        Account account = OntologyAccountManager.INSTANCE.createAccount("123456");
-        // TODO : Should i create instance to WalletMgr in OntSdk instance
-        Log.d("TEST", "======================ACCOUNT======================");
-        Log.d("TEST", " > " + account.key);
-        Log.d("TEST", " > " + account.address);
-        Log.d("TEST", " > " + account.publicKey);
-        Log.d("TEST", "===================================================");
 
-        String mnemonic = OntologyKeyManager.INSTANCE.generateMnemonic();
-        Log.d("TEST", " > " + mnemonic);
-        Log.d("TEST", " > " + OntologyKeyManager.INSTANCE.getSeedFromMnemonic(mnemonic));
-        Log.d("TEST", " > " + OntologyKeyManager.INSTANCE.getPrivatekeyFromMnemonicBip44(mnemonic));
+        OntologyManager.INSTANCE.initializeOntology(this);
 
+        findViewById(R.id.btn_create_account).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OntologyAccountManager.INSTANCE.createAccount(password);
+            }
+        });
+
+        findViewById(R.id.btn_get_account_info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("TEST", "> " + OntologyManager.INSTANCE.getAddress());
+            }
+        });
+
+        findViewById(R.id.btn_get_mnemonic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("TEST", "> " + CryptoSharedPreference.INSTANCE.getEncryptedMnemonic());
+                Log.d("TEST", "> " + OntologyKeyManager.INSTANCE.decryptMnemonic(CryptoSharedPreference.INSTANCE.getEncryptedMnemonic(), password, OntologyManager.INSTANCE.getAddress()));
+            }
+        });
+
+        findViewById(R.id.btn_export_wallet_file).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("TEST", "> " + OntologyKeyManager.INSTANCE.exportFileKeystore());
+
+            }
+        });
+
+//        String mnemonic = OntologyKeyManager.INSTANCE.generateMnemonic();
+//        Log.d("TEST", " > " + mnemonic);
+//        Log.d("TEST", " > " + OntologyKeyManager.INSTANCE.getSeedFromMnemonic(mnemonic));
+//        Log.d("TEST", " > " + OntologyKeyManager.INSTANCE.getPrivateKeyFromMnemonicBip44(mnemonic));
 
 //        FutureTask<Integer> futureBlockHeight = new FutureTask<>(new Callable<Integer>() {
 ////            @Override
